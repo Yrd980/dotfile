@@ -9,8 +9,8 @@ https://catppuccin.com/
 i use arch linux kde environment then kitty and tmux as work tool
 
 picture show:
-![fastfetch](../img/fastfetch.png)
-![lazyvim](../img/lazyvim.png)
-![snacks_search_file](../img/snacks_search_file.png)
-![split_window](../img/split_window.png)
-![yazi](../img/yazi.png)
+![fastfetch](https://github.com/Yrd980/dotfile/blob/main/img/fastfetch.png)
+![lazyvim](https://github.com/Yrd980/dotfile/blob/main/lazyvim.png)
+![snacks_search_file](https://github.com/Yrd980/dotfile/blob/main/img/snacks_search_file.png)
+![split_window](https://github.com/Yrd980/dotfile/blob/main/img/split_window.png)
+![yazi](https://github.com/Yrd980/dotfile/blob/main/img/yazi.png)
