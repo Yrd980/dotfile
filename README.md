@@ -1,9 +1,9 @@
 # Attention
-Although my computer is Windows but wsl isn't good as i thought and Ubuntu since its history (snap) so i don't like it
-MacOS homebrew、zoxide need manual install
-fish may cause error just copy it to Ai to solve (MacOS may show kitty crash just fix kitty config for Unix bind and default terminal fish to your (which fish) maybe in /opt/brew/)
-Keymaps should go to specify folder to check
-I used Hyprland till enviroment but it isn't fit to everyone
+- Although my computer is Windows but wsl isn't good as i thought and Ubuntu since its history (snap) so i don't like it
+- MacOS homebrew、zoxide need manual install
+- fish may cause error just copy it to Ai to solve (MacOS may show kitty crash just fix kitty config for Unix bind and default terminal fish to your (which fish) maybe in /opt/brew/)
+- Keymaps should go to specify folder to check
+- I used Hyprland till enviroment but it isn't fit to everyone
 
 ## Reference project:
 - https://dotfiles-docs.vercel.app/
