@@ -9,6 +9,7 @@
 - https://dotfiles-docs.vercel.app/
 - https://github.com/linkarzu/linkarzu
 - https://github.com/jkmeansesc/dotfiles
+- https://github.com/charleschetty/dotfile
 
 ## Specially think for
 - https://catppuccin.com/
