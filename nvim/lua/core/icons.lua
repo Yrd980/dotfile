@@ -13,10 +13,6 @@ return {
     DiagnosticWarn = "",
   },
   lualine = {
-    CopilotEnabled = "",
-    CopilotDsiabled = "",
-    CopilotWarning = "",
-    CopilotUnknown = "",
     DiagnosticError = "",
     DiagnosticHint = "",
     DiagnosticInfo = "",

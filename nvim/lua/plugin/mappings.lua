@@ -227,51 +227,6 @@ M.neotree = {
   },
 }
 
-M.telescope = {
-  plugin = true,
-  n = {
-    -- find
-    ["<Leader>ff"] = { "<CMD> Telescope find_files <CR>", "Find files" },
-    ["<Leader>fa"] = { "<CMD> Telescope find_files follow=true no_ignore=true hidden=true <CR>", "Find all" },
-    ["<Leader>fg"] = { "<CMD> Telescope live_grep <CR>", "Live grep" },
-    ["<Leader>fb"] = { "<CMD> Telescope buffers <CR>", "Find buffers" },
-    ["<Leader>fh"] = { "<CMD> Telescope help_tags <CR>", "Help page" },
-    ["<Leader>fH"] = { "<CMD> Telescope highlights <CR>", "Find highlights" },
-    ["<Leader>fo"] = { "<CMD> Telescope oldfiles <CR>", "Find oldfiles" },
-    ["<Leader>fz"] = { "<CMD> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
-    ["<Leader>fM"] = { "<CMD> Telescope marks <CR>", "Telescope bookmarks" },
-    ["<Leader>fu"] = { "<CMD> Telescope undo<CR>", "Find undo" },
-    ["<Leader>fi"] = { "<CMD> Nerdy<CR>", "Find icons" },
-
-    -- git
-    ["<Leader>gc"] = { "<CMD> Telescope git_commits <CR>", "Git commits" },
-    ["<Leader>gS"] = { "<CMD> Telescope git_status <CR>", "Git status" },
-
-    -- noice history
-    ["<Leader>fn"] = { "<CMD> Noice telescope<CR>", "Noice history" },
-  },
-}
-
-M.gitsigns = {
-  plugin = true,
-  n = {
-    -- Navigation through hunks
-    ["]h"] = { function() require("gitsigns").next_hunk() end, "Next hunk", opts = { expr = true } },
-    ["[h"] = { function() require("gitsigns").prev_hunk() end, "Prev hunk", opts = { expr = true } },
-
-    -- Actions
-    ["<Leader>gr"] = { function() require("gitsigns").reset_hunk() end, "Reset hunk" },
-    ["<Leader>gR"] = { function() require("gitsigns").reset_buffer() end, "Reset buffer" },
-    ["<Leader>gp"] = { function() require("gitsigns").preview_hunk() end, "Preview hunk" },
-    ["<Leader>gs"] = { function() require("gitsigns").stage_hunk() end, "Stage hunk" },
-    ["<Leader>gS"] = { function() require("gitsigns").stage_buffer() end, "Stage buffer" },
-    ["<Leader>gu"] = { function() require("gitsigns").undo_stage_hunk() end, "Undo hunk" },
-    ["<Leader>gb"] = { function() require("gitsigns").blame_line() end, "Blame line" },
-    ["<Leader>gB"] = { function() require("gitsigns").blame_line { full = true } end, "Blame buffer" },
-    ["<Leader>gd"] = { function() require("gitsigns").diffthis() end, "Git diff" },
-    ["<Leader>gt"] = { function() require("gitsigns").toggle_current_line_blame() end, "Toggle line blame" },
-  },
-}
 
 M.toggleterm = {
   plugin = true,

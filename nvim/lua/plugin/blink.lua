@@ -30,17 +30,12 @@ return {
     end,
   },
 
-  { "tpope/vim-dadbod" },
 
   {
     "saghen/blink.cmp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       "giuxtaposition/blink-cmp-copilot",
-      {
-        "kristijanhusak/vim-dadbod-completion",
-        ft = { "sql", "mysql", "plsql" },
-      },
       "saghen/blink.compat",
     },
     version = "*",
@@ -81,11 +76,7 @@ return {
             "copilot",
             "path",
             "buffer",
-            "dadbod",
             "markdown",
-            "avante_commands",
-            "avante_mentions",
-            "avante_files",
           },
           providers = {
             lsp = {
@@ -124,11 +115,6 @@ return {
               module = "blink.cmp.sources.buffer",
               score_offset = 60,
             },
-            dadbod = {
-              name = "Dadb",
-              module = "vim_dadbod_completion.blink",
-              score_offset = 50,
-            },
             cmdline = {
               min_keyword_length = 3,
             },
@@ -136,24 +122,6 @@ return {
               name = "RenderMarkdown",
               module = "render-markdown.integ.blink",
               fallbacks = { "lsp" },
-            },
-            avante_commands = {
-              name = "avante_commands",
-              module = "blink.compat.source",
-              score_offset = 110,
-              opts = {},
-            },
-            avante_files = {
-              name = "avante_files",
-              module = "blink.compat.source",
-              score_offset = 120,
-              opts = {},
-            },
-            avante_mentions = {
-              name = "avante_mentions",
-              module = "blink.compat.source",
-              score_offset = 130,
-              opts = {},
             },
           },
         },

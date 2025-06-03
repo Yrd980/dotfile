@@ -36,9 +36,12 @@ return {
       "yamlls", -- yaml
       "jsonls", -- json
       "markdown_oxide", -- markdown
+      "jdtls", -- java
       -- "taplo", -- toml
       "pyright", -- python
       "dockerls", -- Dockerfile
+      "gopls", -- go
+      "rust_analyzer", -- rust
     }
 
     local formatters = {

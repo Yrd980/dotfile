@@ -27,7 +27,6 @@ spec "plugin.trouble"
 ---------------------
 -- EDITOR
 ---------------------
-spec "plugin.gitsigns"
 spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
 spec "plugin.pangu" -- auto format to add a space between cjk and english letters
@@ -37,14 +36,13 @@ spec "plugin.ts-comments" -- enhance neovim's native comments, neovim natively s
 spec "plugin.snacks"
 spec "plugin.vim-easy-align"
 spec "plugin.bullets"
-spec "plugin.mini-files"
+spec "plugin.image"
 spec "plugin.mini-surround"
 spec "plugin.flash"
-spec "plugin.markdown-preview"
-spec "plugin.grug-far"
 spec "plugin.yazi"
 spec "plugin.indent-blankline"
-
+spec "plugin.kd_translate"
+spec "plugin.clipboard-image"
 
 ---------------------
 -- UI
@@ -57,7 +55,7 @@ spec "plugin.todo-comments"
 spec "plugin.catppuccin"
 spec "plugin.smear-cursor"
 spec "plugin.noice"
-spec "plugin.fidget"
+spec "plugin.dash-board"
 spec "plugin.stay-centered"
 
 -- bootstrap lazy
@@ -66,11 +64,12 @@ require "core.lazy"
 -- setup highlights
 require "core.highlights"
 
-vim.keymap.set("n", "gx", function()
-  local word = vim.fn.expand("<cfile>")
-  if not word:match("^https?://") then
+vim.keymap.set("n", "gb", function()
+  local word = vim.fn.expand("<cfile>") if not word:match("^https?://") then
     -- not a real URL, search it
     word = "https://www.google.com/search?q=" .. vim.fn.escape(word, " ")
   end
   vim.fn.jobstart({ "xdg-open", word }, { detach = true })
 end, { noremap = true, silent = true })
+
+
