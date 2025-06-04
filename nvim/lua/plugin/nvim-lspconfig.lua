@@ -41,6 +41,7 @@ return {
       "pyright", -- python
       "dockerls", -- Dockerfile
       "gopls", -- go
+      "clangd", -- c/c++ 
       "rust_analyzer", -- rust
     }
 
@@ -49,11 +50,13 @@ return {
       "prettier", -- prettier formatter
       "shfmt", -- shell formatter
       "black", -- python formatter
+      "clang-format", -- c/c++ formatter
     }
 
     local linters = {
       "markdownlint", -- markdown linter
       "ruff", -- python linter
+      "clang-tidy", -- advanced C/C++ linter
     }
 
     local ensure_installed = {}
