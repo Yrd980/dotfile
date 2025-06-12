@@ -14,6 +14,7 @@ require "core.keymaps"
 spec "plugin.nvim-treesitter"
 spec "plugin.which-key"
 spec "plugin.blink"
+spec "plugin.luasnip"
 spec "plugin.nvim-treesitter-content"
 spec "plugin.nvim-lspconfig"
 
@@ -60,4 +61,17 @@ vim.keymap.set("n", "gb", function()
   vim.fn.jobstart({ "xdg-open", word }, { detach = true })
 end, { noremap = true, silent = true })
 
-
+local _select = vim.ui.select
+function vim.ui.select(items, opts, on_choice)
+    if
+        opts
+        and opts.prompt
+        and type(opts.prompt) == "string"
+        and string.match(opts.prompt, [[^You've reached.*limit.*Upgrade.*$]]) -- ...
+    then
+        vim.notify("Copilot: " .. opts.prompt, vim.log.levels.ERROR) --you can also delete this notify
+        vim.cmd("Copilot disable")
+    else
+        return _select(items, opts, on_choice)
+    end
+end
