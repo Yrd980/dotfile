@@ -34,6 +34,7 @@ spec "plugin.indent-blankline"
 spec "plugin.kd_translate"
 spec "plugin.clipboard-image"
 spec "plugin.conform"
+spec "plugin.flutter-tools"
 
 ---------------------
 -- UI

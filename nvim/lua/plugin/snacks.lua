@@ -36,7 +36,6 @@ return {
     { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
 
-    { "<leader>k", function() Snacks.terminal() end, desc = "Toggle Terminal" },
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
 
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },

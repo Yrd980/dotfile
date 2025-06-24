@@ -37,11 +37,14 @@ return {
       "jsonls", -- json
       "markdown_oxide", -- markdown
       "jdtls", -- java
+      "kotlin_language_server", -- kotlin
       -- "taplo", -- toml
       "pyright", -- python
       "dockerls", -- Dockerfile
       "gopls", -- go
-      "clangd", -- c/c++ 
+      "dartls", -- dart
+      "clangd", -- c/c++
+      "gdscript", -- gdscript
       "rust_analyzer", -- rust
     }
 
