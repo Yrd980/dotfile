@@ -29,39 +29,48 @@ return {
 
     require("inc_rename").setup()
 
+    -- LSP Servers to be managed by Mason and configured via lspconfig
     local servers = {
-      "html", -- html
-      "cssls", -- css
-      "lua_ls", -- lua
-      "yamlls", -- yaml
-      "jsonls", -- json
-      "markdown_oxide", -- markdown
-      "jdtls", -- java
-      "kotlin_language_server", -- kotlin
-      -- "taplo", -- toml
-      "pyright", -- python
+      "bashls", -- Bash
+      "clangd", -- C/C++
+      "cssls", -- CSS
+      "dartls", -- Dart
       "dockerls", -- Dockerfile
-      "gopls", -- go
-      "dartls", -- dart
-      "clangd", -- c/c++
-      "gdscript", -- gdscript
-      "rust_analyzer", -- rust
+      "gdscript", -- Godot (GDScript)
+      "gopls", -- Go
+      "graphql", -- GraphQL
+      "html", -- HTML
+      "jdtls", -- Java
+      "jsonls", -- JSON
+      "kotlin_language_server", -- Kotlin
+      "lua_ls", -- Lua
+      "markdown_oxide", -- Markdown
+      "pyright", -- Python
+      "rust_analyzer", -- Rust
+      "sqlls", -- SQL (sql-language-server)
+      "ts_ls", -- JavaScript / TypeScript
+      "yamlls", -- YAML
     }
 
+    -- Formatters (via null-ls or conform.nvim, depending on your stack)
     local formatters = {
-      "stylua", -- lua formatter
-      "prettier", -- prettier formatter
-      "shfmt", -- shell formatter
-      "black", -- python formatter
-      "clang-format", -- c/c++ formatter
+      "prettier", -- HTML, CSS, JS, TS, JSON, Markdown
+      "stylua", -- Lua
+      "shfmt", -- Shell
+      "black", -- Python
+      "clang-format", -- C/C++
+      "sql-formatter", -- SQL (or 'sqlfmt' if preferred)
     }
 
+    -- Linters (also via null-ls or similar plugin)
     local linters = {
-      "markdownlint", -- markdown linter
-      "ruff", -- python linter
-      "clang-tidy", -- advanced C/C++ linter
+      "eslint_d", -- JS/TS Linter (lightweight daemon)
+      "markdownlint", -- Markdown
+      "ruff", -- Python (fast replacement for flake8 + isort)
+      "clang-tidy", -- C/C++
+      "shellcheck", -- Shell
+      "yamllint", -- YAML
     }
-
     local ensure_installed = {}
     vim.list_extend(ensure_installed, servers)
     vim.list_extend(ensure_installed, formatters)
