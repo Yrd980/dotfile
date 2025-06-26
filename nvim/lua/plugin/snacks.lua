@@ -5,6 +5,22 @@ return {
   lazy = false,
   dependencies = {
     { "folke/persistence.nvim", config = true },
+    { "nvim-tree/nvim-web-devicons", opts = {} },
+    { "echasnovski/mini.icons", version = "*" },
+  },
+  opts = {
+    bigfile = { enabled = true },
+    dashboard = { enabled = true },
+    explorer = { enabled = true },
+    indent = { enabled = true },
+    input = { enabled = true },
+    picker = { enabled = true },
+    notifier = { enabled = true },
+    quickfile = { enabled = true },
+    scope = { enabled = true },
+    scroll = { enabled = true },
+    statuscolumn = { enabled = true },
+    words = { enabled = true },
   },
   keys = {
     -- Top Pickers & Explorer

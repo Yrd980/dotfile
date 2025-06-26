@@ -47,6 +47,8 @@ return {
         "c",
         "cpp",
         "objc",
+        "typst",
+        "svelte",
         "cuda",
         "proto",
         "hyprlang", -- hyprland parser
@@ -77,33 +79,33 @@ return {
         },
         move = {
           enable = true,
-          set_jumps = true, 
+          set_jumps = true,
           goto_next_start = {
-            ["]m"] = "@function.outer",      
-            ["]i"] = "@conditional.outer",  
-            ["]l"] = "@loop.outer",        
-            ["]b"] = "@block.outer",      
+            ["]m"] = "@function.outer",
+            ["]i"] = "@conditional.outer",
+            ["]l"] = "@loop.outer",
+            ["]b"] = "@block.outer",
           },
           goto_next_end = {
-            ["]M"] = "@function.outer",     
-            ["]I"] = "@conditional.outer",  
-            ["]L"] = "@loop.outer",        
-            ["]B"] = "@block.outer",      
+            ["]M"] = "@function.outer",
+            ["]I"] = "@conditional.outer",
+            ["]L"] = "@loop.outer",
+            ["]B"] = "@block.outer",
           },
           goto_previous_start = {
-            ["[m"] = "@function.outer",   
+            ["[m"] = "@function.outer",
             ["[i"] = "@conditional.outer",
-            ["[l"] = "@loop.outer",      
-            ["[b"] = "@block.outer",    
+            ["[l"] = "@loop.outer",
+            ["[b"] = "@block.outer",
           },
           goto_previous_end = {
-            ["[M"] = "@function.outer", 
+            ["[M"] = "@function.outer",
             ["[I"] = "@conditional.outer",
-            ["[L"] = "@loop.outer",      
-            ["[B"] = "@block.outer",    
+            ["[L"] = "@loop.outer",
+            ["[B"] = "@block.outer",
           },
         },
-      }
+      },
     }
   end,
 }
