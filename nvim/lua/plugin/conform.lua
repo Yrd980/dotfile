@@ -5,10 +5,8 @@ return {
   keys = {
     {
       "<Leader>ll",
-      function()
-        require("conform").format { async = true, lsp_format = "fallback" }
-      end,
-      mode = "", -- optional: set to "n" for normal mode
+      function() require("conform").format { async = true, lsp_format = "fallback" } end,
+      mode = "",
       desc = "[F]ormat buffer",
     },
   },
@@ -33,29 +31,16 @@ return {
         handlebars = { "prettier" },
         sh = { "shfmt" },
         bash = { "shfmt" },
-        go = { "gofmt" },       -- or "goimports"
+        go = { "gofmt" }, -- or "goimports"
         rust = { "rustfmt" },
         java = { "google-java-format" }, -- or "clang-format" for generic
+        kotlin = { "ktfmt" },
         c = { "clang-format" },
         cpp = { "clang-format" },
         -- toml = { "taplo" },
       },
-      -- Optional: enable auto-format on save
-      -- format_on_save = {
-      --   timeout_ms = 500,
-      --   lsp_format = "fallback",
-      -- },
     }
 
     require("conform").formatters.shfmt = { prepend_args = { "-i", "2" } }
-
-    -- Optional: additional formatter configs
-    -- require("conform").formatters["clang-format"] = { prepend_args = { "-style=Google" } }
-    -- require("conform").formatters["google-java-format"] = {
-    --   command = "google-java-format",
-    --   args = { "-" },
-    --   stdin = true,
-    -- }
   end,
 }
-

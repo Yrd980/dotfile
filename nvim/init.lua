@@ -24,8 +24,6 @@ spec "plugin.nvim-lspconfig"
 spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
 spec "plugin.pangu" -- auto format to add a space between cjk and english letters
-spec "plugin.nvim-autopairs"
-spec "plugin.nvim-ts-autotag"
 spec "plugin.snacks"
 spec "plugin.bullets"
 spec "plugin.flash"
