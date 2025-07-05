@@ -31,6 +31,7 @@ spec "plugin.indent-blankline"
 spec "plugin.kd_translate"
 spec "plugin.clipboard-image"
 spec "plugin.conform"
+spec "plugin.nvim-autopair"
 spec "plugin.flutter-tools"
 
 ---------------------
