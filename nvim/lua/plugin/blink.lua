@@ -14,6 +14,12 @@ return {
           nerd_font_variant = "mono",
         },
 
+        keymap = {
+          preset = "none",
+          ["<tab>"] = { "select_next", "fallback" },
+          ["<s-tab>"] = { "select_prev", "fallback" },
+        },
+
         sources = {
           default = {
             "lsp",
