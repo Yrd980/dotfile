@@ -9,25 +9,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("blink.cmp").setup {
-        keymap = {
-          preset = "none",
-          ["<c-w>"] = { "show", "hide", "fallback" },
-          ["<c-y>"] = { "select_and_accept", "fallback" },
-          ["<cr>"] = { "accept", "fallback" },
-
-          ["<down>"] = { "select_next", "fallback" },
-          ["<up>"] = { "select_prev", "fallback" },
-          ["<c-j>"] = { "select_next", "fallback" },
-          ["<c-k>"] = { "select_prev", "fallback" },
-          ["<tab>"] = { "select_next", "fallback" },
-          ["<s-tab>"] = { "select_prev", "fallback" },
-
-          ["<c-n>"] = { "snippet_forward", "fallback" },
-          ["<c-p>"] = { "snippet_backward", "fallback" },
-
-          ["<c-u>"] = { "scroll_documentation_up", "fallback" },
-          ["<c-d>"] = { "scroll_documentation_down", "fallback" },
-        },
 
         appearance = {
           nerd_font_variant = "mono",

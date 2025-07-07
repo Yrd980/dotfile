@@ -1,4 +1,4 @@
----@diagnostic disable: undefined-global
+--@diagnostic disable: undefined-global
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -24,7 +24,7 @@ return {
   },
   keys = {
     -- Top Pickers & Explorer
-    { "<leader><space>", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+    { "<leader>f", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>n", function() vim.api.nvim_command "Noice" end, desc = "Notification History" },
@@ -49,13 +49,13 @@ return {
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
 
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-
+    { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
-    { "<leader>ss", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
+    { "<leader><leader>", function() Snacks.picker.lsp_symbols() end, desc = "LSP Symbols" },
     { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
   },
   config = function()
@@ -71,28 +71,8 @@ return {
             { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
-          header = [[                                                                     
-       ████ ██████           █████      ██                     
-      ███████████             █████                             
-      █████████ ███████████████████ ███   ███████████   
-     █████████  ███    █████████████ █████ ██████████████   
-    █████████ ██████████ █████████ █████ █████ ████ █████   
-  ███████████ ███    ███ █████████ █████ █████ ████ █████  
- ██████  █████████████████████ ████ █████ █████ ████ ██████ ]],
         },
       },
-      indent = { enabled = true },
-      input = { enabled = true },
-      notifier = {
-        enabled = true,
-        timeout = 5000, -- default: 3000
-        top_down = false, -- false = down to top
-        style = "compat",
-      },
-      quickfile = { enabled = true },
-      statuscolumn = { enabled = true },
-      words = { enabled = true },
-      scope = { enabled = true },
       styles = {
         notification = {
           border = "single",
@@ -100,11 +80,21 @@ return {
         scratch = {
           wo = { winhighlight = "SnacksNormal:Normal" },
         },
-        notification_history = {
-          wo = { winhighlight = "SnacksNormal:Normal" },
-        },
         input = {
           border = "single",
+        },
+      },
+      sections = {
+        {
+          section = "terminal",
+          cmd = "chafa ~/pictures/wallpaper/portrait.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
+          height = 17,
+          padding = 1,
+        },
+        {
+          pane = 2,
+          { section = "keys", gap = 1, padding = 1 },
+          { section = "startup" },
         },
       },
     }
