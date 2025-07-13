@@ -9,24 +9,25 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("blink.cmp").setup {
-        keymap = {
-          preset = "none",
-          ["<cr>"] = { "accept", "fallback" },
-          ["<tab>"] = { "select_next", "fallback" },
-          ["<s-tab>"] = { "select_prev", "fallback" },
-        },
 
         appearance = {
           nerd_font_variant = "mono",
         },
 
+        keymap = {
+          preset = "none",
+          ["<tab>"] = { "select_next", "fallback" },
+          ["<s-tab>"] = { "select_prev", "fallback" },
+          ["<cr>"] = { "accept", "fallback" },
+        },
+
         sources = {
           default = {
             "lsp",
-            "snippets",
+            -- "snippets",
             "path",
             "buffer",
-            "markdown",
+            -- "markdown",
           },
           providers = {
             lsp = {
@@ -34,11 +35,11 @@ return {
               module = "blink.cmp.sources.lsp",
               score_offset = 100,
             },
-            snippets = {
-              name = "snip",
-              module = "blink.cmp.sources.snippets",
-              score_offset = 90,
-            },
+            -- snippets = {
+            --   name = "snip",
+            --   module = "blink.cmp.sources.snippets",
+            --   score_offset = 90,
+            -- },
             path = {
               name = "path",
               module = "blink.cmp.sources.path",
@@ -49,14 +50,14 @@ return {
               module = "blink.cmp.sources.buffer",
               score_offset = 60,
             },
-            cmdline = {
-              min_keyword_length = 3,
-            },
-            markdown = {
-              name = "rendermarkdown",
-              module = "render-markdown.integ.blink",
-              fallbacks = { "lsp" },
-            },
+            -- cmdline = {
+            --   min_keyword_length = 3,
+            -- },
+            --   markdown = {
+            --     name = "rendermarkdown",
+            --     module = "render-markdown.integ.blink",
+            --     fallbacks = { "lsp" },
+            --   },
           },
         },
 
@@ -87,6 +88,7 @@ return {
     end,
   },
 }
+
 -- return {
 --   {
 --     "zbirenbaum/copilot.lua",

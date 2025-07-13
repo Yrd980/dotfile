@@ -17,6 +17,7 @@ spec "plugin.blink"
 spec "plugin.luasnip"
 spec "plugin.nvim-treesitter-content"
 spec "plugin.nvim-lspconfig"
+spec "plugin.nvim-ts-autotag"
 
 ---------------------
 -- EDITOR

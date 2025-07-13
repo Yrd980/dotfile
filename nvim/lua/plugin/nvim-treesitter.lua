@@ -11,6 +11,7 @@ return {
     "luckasRanarison/tree-sitter-hyprlang",
   },
   config = function()
+    require("nvim-ts-autotag").setup()
     require("nvim-treesitter.configs").setup {
       highlight = {
         enable = true,
