@@ -24,10 +24,9 @@ return {
         sources = {
           default = {
             "lsp",
-            -- "snippets",
             "path",
             "buffer",
-            -- "markdown",
+            "cmdline",
           },
           providers = {
             lsp = {
@@ -35,11 +34,6 @@ return {
               module = "blink.cmp.sources.lsp",
               score_offset = 100,
             },
-            -- snippets = {
-            --   name = "snip",
-            --   module = "blink.cmp.sources.snippets",
-            --   score_offset = 90,
-            -- },
             path = {
               name = "path",
               module = "blink.cmp.sources.path",
@@ -50,14 +44,14 @@ return {
               module = "blink.cmp.sources.buffer",
               score_offset = 60,
             },
-            -- cmdline = {
-            --   min_keyword_length = 3,
-            -- },
-            --   markdown = {
-            --     name = "rendermarkdown",
-            --     module = "render-markdown.integ.blink",
-            --     fallbacks = { "lsp" },
-            --   },
+            cmdline = {
+              min_keyword_length = 3,
+            },
+              markdown = {
+                name = "rendermarkdown",
+                module = "render-markdown.integ.blink",
+                fallbacks = { "lsp" },
+              },
           },
         },
 

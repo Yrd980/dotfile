@@ -47,6 +47,7 @@ return {
       "sqlls", -- SQL (sql-language-server)
       "ts_ls", -- JavaScript / TypeScript
       "yamlls", -- YAML
+      "texlab", -- tex
     }
 
     -- Formatters (via null-ls or conform.nvim, depending on your stack)

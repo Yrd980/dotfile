@@ -14,8 +14,11 @@ return {
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
+    notifier = {
+      enabled = true,
+      timeout = 3000,
+    },
     picker = { enabled = true },
-    notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
@@ -74,9 +77,6 @@ return {
         },
       },
       styles = {
-        notification = {
-          border = "single",
-        },
         scratch = {
           wo = { winhighlight = "SnacksNormal:Normal" },
         },
@@ -98,38 +98,6 @@ return {
         },
       },
     }
-
-    vim.api.nvim_create_autocmd("BufDelete", {
-      group = vim.api.nvim_create_augroup("bufdelpost_autocmd", {}),
-      desc = "BufDeletePost User autocmd",
-      callback = function()
-        vim.schedule(
-          function()
-            vim.api.nvim_exec_autocmds("User", {
-              pattern = "BufDeletePost",
-            })
-          end
-        )
-      end,
-    })
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "BufDeletePost",
-      group = vim.api.nvim_create_augroup("dashboard_delete_buffers", {}),
-      desc = "Quit Neovim when no available buffers",
-      callback = function(ev)
-        local deleted_name = vim.api.nvim_buf_get_name(ev.buf)
-        local deleted_ft = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
-        local deleted_bt = vim.api.nvim_get_option_value("buftype", { buf = ev.buf })
-        local no_buffers_left = deleted_name == "" and deleted_ft == "" and deleted_bt == ""
-        if no_buffers_left then
-          vim.cmd "quit" -- Quit Neovim when no buffers are left
-        end
-      end,
-    })
-
-    -- Lsp progress
-    -- https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md#-examples
     ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
     local progress = vim.defaulttable()
     vim.api.nvim_create_autocmd("LspProgress", {
@@ -159,13 +127,11 @@ return {
         progress[client.id] = vim.tbl_filter(function(v) return table.insert(msg, v.msg) or not v.done end, p)
 
         local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        ---@diagnostic disable-next-line: param-type-mismatch
         vim.notify(table.concat(msg, "\n"), "info", {
           id = "lsp_progress",
           title = client.name,
           opts = function(notif)
             notif.icon = #progress[client.id] == 0 and " "
-              ---@diagnostic disable-next-line: undefined-field
               or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
           end,
         })

@@ -27,11 +27,13 @@ spec "plugin.carbon-now" -- screenshot code
 spec "plugin.pangu" -- auto format to add a space between cjk and english letters
 spec "plugin.snacks"
 spec "plugin.bullets"
+spec "plugin.vimtex"
 spec "plugin.indent-blankline"
 spec "plugin.kd_translate"
 spec "plugin.clipboard-image"
 spec "plugin.conform"
 spec "plugin.nvim-autopair"
+spec "plugin.flutter-tool"
 
 ---------------------
 -- UI

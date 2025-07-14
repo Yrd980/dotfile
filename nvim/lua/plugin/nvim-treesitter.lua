@@ -16,6 +16,10 @@ return {
       highlight = {
         enable = true,
         use_languagetree = true,
+        disable = function(_, buf)
+          local ft = vim.bo[buf].filetype
+          return ft == "tex" or ft == "latex"
+        end,
       },
       indent = { enable = true },
       ensure_installed = {
@@ -28,7 +32,7 @@ return {
         "jsdoc",
         "json",
         "jsonc",
-        "latex",
+        -- "latex",
         "lua",
         "luadoc",
         "luap",
