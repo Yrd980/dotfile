@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.gmaplocalleader = ","
+vim.g.gmaplocalleader = " "
 
 -- set utf-8
 vim.scriptencoding = "utf-8"
@@ -37,7 +37,7 @@ vim.opt.signcolumn = "yes" -- always show the sign column
 
 vim.opt.updatetime = 250 -- length of time to wait before triggering the plugin
 
-vim.opt.timeoutlen = 300 -- shorten key timeout length for which-key
+vim.opt.timeoutlen = 400 -- shorten key timeout length for which-key
 
 vim.opt.splitbelow = true -- splitting a new window below the current one
 vim.opt.splitright = true -- splitting a new window at the right of the current one

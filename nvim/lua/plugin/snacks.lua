@@ -30,6 +30,7 @@ return {
     { "<leader>f", function() Snacks.picker.files() end, desc = "Find Files" },
     { "<leader>/", function() Snacks.picker.grep() end, desc = "Grep" },
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>,", function() Snacks.terminal() end, desc = "Toggle Terminal" },
     { "<leader>n", function() vim.api.nvim_command "Noice" end, desc = "Notification History" },
     { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
     -- find
@@ -37,10 +38,10 @@ return {
     -- search
     { "<leader>s/", function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
+    { "<leader>fc", function() Snacks.picker.files { cwd = vim.fn.stdpath "config" } end, desc = "Find Config File" },
     { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
-    { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
     { "<leader>si", function() Snacks.picker.icons() end, desc = "Icons" },
     { "<leader>sj", function() Snacks.picker.jumps() end, desc = "Jumps" },
     { "<leader>sk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
@@ -48,11 +49,11 @@ return {
     { "<leader>sm", function() Snacks.picker.marks() end, desc = "Marks" },
     { "<leader>sM", function() Snacks.picker.man() end, desc = "Man Pages" },
     { "<leader>sq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
-    { "<leader>sR", function() Snacks.picker.resume() end, desc = "Resume" },
+    { "<leader>sR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+    { "<leader>sr", function() Snacks.picker.resume() end, desc = "Resume" },
     { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
 
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
-    { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
+    { "<leader>g", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
@@ -76,66 +77,6 @@ return {
           },
         },
       },
-      styles = {
-        scratch = {
-          wo = { winhighlight = "SnacksNormal:Normal" },
-        },
-        input = {
-          border = "single",
-        },
-      },
-      sections = {
-        {
-          section = "terminal",
-          cmd = "chafa ~/pictures/wallpaper/portrait.jpg --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1",
-          height = 17,
-          padding = 1,
-        },
-        {
-          pane = 2,
-          { section = "keys", gap = 1, padding = 1 },
-          { section = "startup" },
-        },
-      },
     }
-    ---@type table<number, {token:lsp.ProgressToken, msg:string, done:boolean}[]>
-    local progress = vim.defaulttable()
-    vim.api.nvim_create_autocmd("LspProgress", {
-      ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
-      callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id)
-        local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
-        if not client or type(value) ~= "table" then return end
-        local p = progress[client.id]
-
-        for i = 1, #p + 1 do
-          if i == #p + 1 or p[i].token == ev.data.params.token then
-            p[i] = {
-              token = ev.data.params.token,
-              msg = ("[%3d%%] %s%s"):format(
-                value.kind == "end" and 100 or value.percentage or 100,
-                value.title or "",
-                value.message and (" **%s**"):format(value.message) or ""
-              ),
-              done = value.kind == "end",
-            }
-            break
-          end
-        end
-
-        local msg = {} ---@type string[]
-        progress[client.id] = vim.tbl_filter(function(v) return table.insert(msg, v.msg) or not v.done end, p)
-
-        local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-        vim.notify(table.concat(msg, "\n"), "info", {
-          id = "lsp_progress",
-          title = client.name,
-          opts = function(notif)
-            notif.icon = #progress[client.id] == 0 and " "
-              or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-          end,
-        })
-      end,
-    })
   end,
 }

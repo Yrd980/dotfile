@@ -12,7 +12,6 @@ require "core.keymaps"
 -- ESSENTIALS
 ---------------------
 spec "plugin.nvim-treesitter"
-spec "plugin.which-key"
 spec "plugin.blink"
 spec "plugin.luasnip"
 spec "plugin.nvim-treesitter-content"
@@ -73,13 +72,3 @@ function vim.ui.select(items, opts, on_choice)
   end
 end
 
-vim.api.nvim_create_user_command(
-  "DeleteComments",
-  function()
-    vim.cmd(("'<,'>g/%s/d"):format(vim.fn.escape(vim.fn.substitute(vim.o.commentstring, "%s", "", "g"), "/.*[]~")))
-  end,
-  {
-    range = true,
-    desc = "Delete comments in the current buffer",
-  }
-)
