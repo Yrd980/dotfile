@@ -30,6 +30,7 @@ return {
     local servers = {
       "bashls", -- Bash
       "clangd", -- C/C++
+      "csharp_ls", -- C#
       "cssls", -- CSS
       "dartls", -- Dart
       "dockerls", -- Dockerfile

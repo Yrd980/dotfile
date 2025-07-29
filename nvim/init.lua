@@ -72,3 +72,38 @@ function vim.ui.select(items, opts, on_choice)
   end
 end
 
+-- Define the project where you want diagnostics disabled
+local disabled_projects = {
+  "/home/yrd/documents/git_clone_code/etc/LogChat",
+  "/home/yrd/documents/git_clone_code/etc/ZcChat",
+}
+
+-- Check if current working directory matches any in the list
+local function diagnostics_disabled_here()
+  local cwd = vim.fn.getcwd()
+  for _, path in ipairs(disabled_projects) do
+    if cwd:find(vim.fn.expand(path), 1, true) == 1 then return true end
+  end
+  return false
+end
+
+-- Disable diagnostics for matching projects when LSP attaches
+local function custom_on_attach(client, bufnr)
+  if diagnostics_disabled_here() then
+    vim.diagnostic.disable(bufnr)
+    vim.schedule(function() vim.notify("🚫 Diagnostics disabled for LogChat project", vim.log.levels.WARN) end)
+  end
+end
+
+-- Attach this to a specific LSP (e.g., clangd or any you're using)
+require("lspconfig").clangd.setup {
+  on_attach = custom_on_attach,
+}
+
+-- (Optional) Apply to all servers globally:
+-- local lspconfig = require("lspconfig")
+-- for _, server in ipairs({ "clangd", "pyright", "lua_ls", "tsserver" }) do
+--   lspconfig[server].setup({
+--     on_attach = custom_on_attach,
+--   })
+-- end
