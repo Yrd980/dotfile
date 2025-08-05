@@ -1,6 +1,6 @@
--- vim.cmd [[colorscheme catppuccin]]
 return {
   "catppuccin/nvim",
+  version = "1.10.0",
   lazy = false,
   priority = 1000,
   name = "catppuccin",
@@ -27,7 +27,7 @@ return {
       color_overrides = {
         mocha = require "core.colors",
       },
-   }
+    }
     vim.cmd [[colorscheme catppuccin]]
   end,
 }
