@@ -20,7 +20,8 @@ spec "plugin.nvim-ts-autotag"
 
 ---------------------
 -- EDITOR
---------------------- spec "plugin.vim-tmux-navigator"
+---------------------
+spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
 spec "plugin.pangu" -- auto format to add a space between cjk and english letters
 spec "plugin.snacks"
