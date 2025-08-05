@@ -39,27 +39,28 @@ set -xg DOTNET_CLI_HOME $XDG_DATA_HOME/dotnet
 set -xg PNPM_HOME $XDG_DATA_HOME/pnpm
 
 # Path
-fish_add_path $XDG_BIN_HOME
-fish_add_path $XDG_BIN_HOME/color-scripts/
-fish_add_path $GOPATH/bin
-fish_add_path $CARGO_HOME/bin
-fish_add_path $XDG_SCRIPT_HOME
-fish_add_path /usr/local/bin
-fish_add_path /usr/local/sbin
-fish_add_path /usr/bin
-fish_add_path /usr/sbin
-fish_add_path /bin
-fish_add_path /sbin
-fish_add_path /usr/lib/rustup/bin
-fish_add_path /usr/lib/go/bin
-fish_add_path $HOME/.dotnet/tools
-fish_add_path $XDG_DATA_HOME/bob/nvim-bin
-fish_add_path $XDG_DATA_HOME/npm/bin
-fish_add_path $XDG_DATA_HOME/nvim/mason/bin
-fish_add_path $HOME/.yarn/bin
-fish_add_path $XDG_DATA_HOME/pnpm
+set -gx PATH \
+  /usr/local/bin \
+  /usr/local/sbin \
+  /usr/bin \
+  /usr/sbin \
+  /bin \
+  /sbin \
+  /usr/lib/rustup/bin \
+  /usr/lib/go/bin \
+  /opt/android-sdk/platform-tools \
+  $XDG_BIN_HOME \
+  $XDG_BIN_HOME/color-scripts \
+  $GOPATH/bin \
+  $CARGO_HOME/bin \
+  $XDG_SCRIPT_HOME \
+  $HOME/.dotnet/tools \
+  $XDG_DATA_HOME/bob/nvim-bin \
+  $XDG_DATA_HOME/npm/bin \
+  $XDG_DATA_HOME/nvim/mason/bin \
+  $HOME/.yarn/bin \
+  $XDG_DATA_HOME/pnpm \
 
-# Editor
 set -xg EDITOR nvim
 set -xg VISUAL $EDITOR
 set -xg SUDO_EDITOR $EDITOR

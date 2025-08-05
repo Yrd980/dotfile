@@ -20,8 +20,7 @@ spec "plugin.nvim-ts-autotag"
 
 ---------------------
 -- EDITOR
----------------------
-spec "plugin.vim-tmux-navigator"
+--------------------- spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
 spec "plugin.pangu" -- auto format to add a space between cjk and english letters
 spec "plugin.snacks"
@@ -33,6 +32,8 @@ spec "plugin.clipboard-image"
 spec "plugin.conform"
 spec "plugin.nvim-autopair"
 spec "plugin.flutter-tool"
+spec "plugin.dirdiff"
+spec "plugin.diffview"
 
 ---------------------
 -- UI
@@ -94,6 +95,17 @@ local function custom_on_attach(client, bufnr)
     vim.schedule(function() vim.notify("🚫 Diagnostics disabled for LogChat project", vim.log.levels.WARN) end)
   end
 end
+
+-- vim.api.nvim_create_user_command("RunShell", function(opts)
+--   vim.fn.jobstart({ "fish", "-c", opts.args }, {
+--     stdout_buffered = true,
+--     on_stdout = function(_, data)
+--       if data then print(table.concat(data, "\n")) end
+--     end,
+--   })
+-- end, {
+--   nargs = 1,
+-- })
 
 -- Attach this to a specific LSP (e.g., clangd or any you're using)
 require("lspconfig").clangd.setup {
