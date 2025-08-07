@@ -1,0 +1,46 @@
+# .fdignore — ignores common heavy or build-related directories
+
+# JavaScript/Node
+node_modules/
+dist/
+build/
+.eslintcache
+
+# Git and editor junk
+.git/
+.cache/
+.vscode/
+.idea/
+.DS_Store
+
+# Rust
+target/
+Cargo.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# C/C++
+*.o
+*.out
+*.a
+*.so
+cmake-build-*/
+
+# Go
+bin/
+pkg/
+*.test
+
+# Java
+*.class
+*.jar
+*.war
+
+# Custom libs or vendor folders
+lib/
+vendor/
+
