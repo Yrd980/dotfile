@@ -75,6 +75,12 @@ vim.g["loaded_perl_provider"] = 0
 vim.g["loaded_ruby_provider"] = 0
 vim.g["loaded_python3_provider"] = 0
 
+vim.env.https_proxy = vim.env.https_proxy or os.getenv "https_proxy"
+vim.env.http_proxy = vim.env.http_proxy or os.getenv "http_proxy"
+vim.env.no_proxy = vim.env.no_proxy or os.getenv "no_proxy"
+-- Optional: avoid flaky v6 routes
+vim.env.CURL_IPRESOLVE = vim.env.CURL_IPRESOLVE or "4"
+
 -- add binaries installed by mason.nvim to path
 ---@diagnostic disable-next-line: undefined-field
 local is_windows = vim.loop.os_uname().sysname == "Windows_NT"

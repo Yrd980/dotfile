@@ -23,7 +23,7 @@ spec "plugin.nvim-ts-autotag"
 ---------------------
 spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
-spec "plugin.pangu" -- auto format to add a space between cjk and english letters
+-- spec "plugin.pangu" -- auto format to add a space between cjk and english letters
 spec "plugin.snacks"
 spec "plugin.bullets"
 spec "plugin.vimtex"
@@ -35,6 +35,7 @@ spec "plugin.nvim-autopair"
 spec "plugin.flutter-tool"
 spec "plugin.dirdiff"
 spec "plugin.diffview"
+spec "plugin.flash"
 
 ---------------------
 -- UI
@@ -96,6 +97,16 @@ local function custom_on_attach(client, bufnr)
     vim.schedule(function() vim.notify("🚫 Diagnostics disabled for LogChat project", vim.log.levels.WARN) end)
   end
 end
+
+--  vim.api.nvim_create_autocmd("FileType", {
+--      pattern = { "c", "cpp", "objc", "objcpp" },
+--      callback = function()
+--        vim.opt_local.tabstop = 4 -- actual spaces for a <Tab>
+--        vim.opt_local.shiftwidth = 4 -- spaces for each indent level
+--        vim.opt_local.softtabstop = 4 -- spaces inserted when pressing <Tab> in insert mode
+--        vim.opt_local.expandtab = false -- use real tabs instead of spaces
+--      end,
+--  }),
 
 -- vim.api.nvim_create_user_command("RunShell", function(opts)
 --   vim.fn.jobstart({ "fish", "-c", opts.args }, {

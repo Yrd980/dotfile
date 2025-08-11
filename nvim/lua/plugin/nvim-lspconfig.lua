@@ -18,58 +18,58 @@ return {
     },
   },
   config = function()
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ setup dependencies                                       │
-    -- ╰──────────────────────────────────────────────────────────╯
-
     require("mason").setup()
-
     require("inc_rename").setup()
 
-    -- LSP Servers to be managed by Mason and configured via lspconfig
+    -- LSP Servers (curated, avoids overlap)
     local servers = {
-      "bashls", -- Bash
-      "clangd", -- C/C++
-      "csharp_ls", -- C#
-      "cssls", -- CSS
-      "dartls", -- Dart
-      "dockerls", -- Dockerfile
-      "gdscript", -- Godot (GDScript)
-      "gopls", -- Go
-      "graphql", -- GraphQL
-      "html", -- HTML
-      "jdtls", -- Java
-      "jsonls", -- JSON
-      "kotlin_language_server", -- Kotlin
-      "lua_ls", -- Lua
-      "markdown_oxide", -- Markdown
-      "pyright", -- Python
-      "rust_analyzer", -- Rust
-      "sqlls", -- SQL (sql-language-server)
-      "ts_ls", -- JavaScript / TypeScript
-      "yamlls", -- YAML
-      "texlab", -- tex
+      "bashls",
+      "clangd",
+      "csharp_ls",
+      "cssls",
+      "dartls",
+      "dockerls",
+      "docker_compose_language_service",
+      "gdscript",
+      "gopls",
+      "graphql",
+      "html",
+      "jdtls",
+      "jsonls",
+      "kotlin_language_server",
+      "lua_ls",
+      "marksman", -- or "markdown_oxide", but not both
+      "pyright", -- Python type checker
+      "ruff", -- Python lint + code actions
+      "rust_analyzer",
+      "sqls", -- prefer sqls over sqlls for perf
+      "vtsls", -- modern TS/JS LS
+      "yamlls",
+      "texlab",
+      "taplo", -- TOML
     }
 
-    -- Formatters (via null-ls or conform.nvim, depending on your stack)
+    -- Formatters (via conform.nvim or null-ls)
     local formatters = {
       "prettier", -- HTML, CSS, JS, TS, JSON, Markdown
       "stylua", -- Lua
       "shfmt", -- Shell
-      "black", -- Python
-      "clang-format", -- C/C++
-      "sql-formatter", -- SQL (or 'sqlfmt' if preferred)
+      "ruff_format", -- Python (unify with Ruff linting)
+      "clang-format",
+      "sqlfluff", -- or sql-formatter
     }
 
-    -- Linters (also via null-ls or similar plugin)
+    -- Linters (via nvim-lint or null-ls)
     local linters = {
-      "eslint_d", -- JS/TS Linter (lightweight daemon)
-      "markdownlint", -- Markdown
-      "ruff", -- Python (fast replacement for flake8 + isort)
-      "clang-tidy", -- C/C++
-      "shellcheck", -- Shell
-      "yamllint", -- YAML
+      "eslint_d",
+      "markdownlint",
+      "ruff", -- Python lint
+      "clang-tidy",
+      "shellcheck",
+      "yamllint",
+      "hadolint", -- Dockerfile
     }
+
     local ensure_installed = {}
     vim.list_extend(ensure_installed, servers)
     vim.list_extend(ensure_installed, formatters)
@@ -80,13 +80,9 @@ return {
     }
     vim.cmd "MasonToolsInstall"
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ setup diagnostic icons and more                          │
-    -- ╰──────────────────────────────────────────────────────────╯
-
+    -- Diagnostics
     local lsp = require("core.icons").lsp
     local border = require("core.utils").straight_boarder "LspBorder"
-
     local signs = {
       ERROR = lsp.DiagnosticError,
       WARN = lsp.DiagnosticWarn,
@@ -97,56 +93,79 @@ return {
     for type, icon in pairs(signs) do
       diagnostic_signs[vim.diagnostic.severity[type]] = icon
     end
-
     vim.diagnostic.config {
-      signs = {
-        text = diagnostic_signs,
-      },
+      signs = { text = diagnostic_signs },
       virtual_text = false,
       update_in_insert = false,
       underline = true,
       severity_sort = true,
       float = {
         focusable = true,
-        border = border, ---@diagnostic disable-line
+        border = border,
         source = true,
         header = "",
       },
     }
-
-    -- Show line diagnostics automatically in hover window
-    -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
     vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
       group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
       callback = function() vim.diagnostic.open_float(nil, { focus = false }) end,
     })
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ setup on_attach and capabilities                         │
-    -- ╰──────────────────────────────────────────────────────────╯
-    local on_attach = require("core.utils").on_attach
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "c", "cpp", "objc", "objcpp" },
+      callback = function()
+        vim.opt_local.tabstop = 4 -- actual spaces for a <Tab>
+        vim.opt_local.shiftwidth = 4 -- spaces for each indent level
+        vim.opt_local.softtabstop = 4 -- spaces inserted when pressing <Tab> in insert mode
+        vim.opt_local.expandtab = false -- use real tabs instead of spaces
+      end,
+    })
 
-    -- NOTE: for markdown_oxide
+    -- Attach
+    local on_attach = require("core.utils").on_attach
+    local capabilities = vim.tbl_deep_extend(
+      "force",
+      vim.lsp.protocol.make_client_capabilities(),
+      require("blink.cmp").get_lsp_capabilities()
+    )
+
+    -- markdown_oxide dynamic registration support
     capabilities.workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
+      didChangeWatchedFiles = { dynamicRegistration = true },
     }
 
-    -- ╭──────────────────────────────────────────────────────────╮
-    -- │ setup each server                                        │
-    -- ╰──────────────────────────────────────────────────────────╯
+    -- Per-server setup
+    local lspconfig = require "lspconfig"
 
     for _, server in ipairs(servers) do
-      local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-      }
+      local opts = { on_attach = on_attach, capabilities = capabilities }
+
+      -- JSON/YAML schemastore
+      if server == "jsonls" then
+        local ok, schemastore = pcall(require, "schemastore")
+        if ok then opts.settings = { json = { schemas = schemastore.json.schemas(), validate = { enable = true } } } end
+      elseif server == "yamlls" then
+        local ok, schemastore = pcall(require, "schemastore")
+        if ok then
+          opts.settings = {
+            yaml = {
+              schemaStore = { enable = false, url = "" },
+              schemas = schemastore.yaml.schemas(),
+              keyOrdering = false,
+            },
+          }
+        end
+      elseif server == "ruff_lsp" then
+        opts.on_attach = function(client, bufnr)
+          -- disable formatting, handled by conform
+          client.server_capabilities.documentFormattingProvider = false
+          on_attach(client, bufnr)
+        end
+      end
+
       local require_ok, settings = pcall(require, "lspsettings." .. server)
       if require_ok then opts = vim.tbl_deep_extend("force", settings, opts) end
-      require("lspconfig")[server].setup(opts)
+      lspconfig[server].setup(opts)
     end
   end,
 }
