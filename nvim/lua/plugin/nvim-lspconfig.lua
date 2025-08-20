@@ -30,7 +30,6 @@ return {
       "dartls",
       "dockerls",
       "docker_compose_language_service",
-      "gdscript",
       "gopls",
       "graphql",
       "html",
@@ -38,25 +37,22 @@ return {
       "jsonls",
       "kotlin_language_server",
       "lua_ls",
-      "marksman", -- or "markdown_oxide", but not both
-      "pyright", -- Python type checker
-      "ruff", -- Python lint + code actions
+      "marksman",
+      "pyright",
       "rust_analyzer",
-      "sqls", -- prefer sqls over sqlls for perf
-      "vtsls", -- modern TS/JS LS
+      "vtsls",
+      "volar",
       "yamlls",
       "texlab",
-      "taplo", -- TOML
+      "taplo",
     }
 
-    -- Formatters (via conform.nvim or null-ls)
     local formatters = {
       "prettier", -- HTML, CSS, JS, TS, JSON, Markdown
       "stylua", -- Lua
       "shfmt", -- Shell
-      "ruff_format", -- Python (unify with Ruff linting)
       "clang-format",
-      "sqlfluff", -- or sql-formatter
+      "ruff", -- Python lint + code actions
     }
 
     -- Linters (via nvim-lint or null-ls)
@@ -64,7 +60,6 @@ return {
       "eslint_d",
       "markdownlint",
       "ruff", -- Python lint
-      "clang-tidy",
       "shellcheck",
       "yamllint",
       "hadolint", -- Dockerfile
