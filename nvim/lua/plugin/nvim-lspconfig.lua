@@ -41,7 +41,7 @@ return {
       "pyright",
       "rust_analyzer",
       "vtsls",
-      "volar",
+      "vue_ls",
       "yamlls",
       "texlab",
       "taplo",
@@ -130,8 +130,9 @@ return {
     }
 
     -- Per-server setup
-    local lspconfig = require "lspconfig"
+    -- local lspconfig = require "lspconfig"
 
+    -- Neovim 0.11+ native LSP flow (no setup())
     for _, server in ipairs(servers) do
       local opts = { on_attach = on_attach, capabilities = capabilities }
 
@@ -151,16 +152,21 @@ return {
           }
         end
       elseif server == "ruff_lsp" then
+        local _on_attach = opts.on_attach
         opts.on_attach = function(client, bufnr)
-          -- disable formatting, handled by conform
           client.server_capabilities.documentFormattingProvider = false
-          on_attach(client, bufnr)
+          if _on_attach then _on_attach(client, bufnr) end
         end
       end
 
-      local require_ok, settings = pcall(require, "lspsettings." .. server)
-      if require_ok then opts = vim.tbl_deep_extend("force", settings, opts) end
-      lspconfig[server].setup(opts)
+      -- allow per-server overrides from lua/lspsettings/<server>.lua
+      local ok, settings = pcall(require, "lspsettings." .. server)
+      if ok then opts = vim.tbl_deep_extend("force", settings, opts) end
+
+      -- 1) define config
+      vim.lsp.config(server, opts)
+      -- 2) enable it (activates for its filetypes)
+      vim.lsp.enable(server)
     end
   end,
 }

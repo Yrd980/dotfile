@@ -23,6 +23,7 @@ spec "plugin.nvim-ts-autotag"
 ---------------------
 spec "plugin.vim-tmux-navigator"
 spec "plugin.carbon-now" -- screenshot code
+spec "plugin.comment"
 -- spec "plugin.pangu" -- auto format to add a space between cjk and english letters
 spec "plugin.snacks"
 spec "plugin.bullets"
@@ -36,6 +37,7 @@ spec "plugin.flutter-tool"
 spec "plugin.dirdiff"
 spec "plugin.diffview"
 spec "plugin.flash"
+-- spec "plugin.image"
 
 ---------------------
 -- UI
@@ -120,9 +122,13 @@ end
 -- })
 
 -- Attach this to a specific LSP (e.g., clangd or any you're using)
-require("lspconfig").clangd.setup {
-  on_attach = custom_on_attach,
-}
+
+-- require("lspconfig").clangd.setup {
+--   on_attach = custom_on_attach,
+-- }
+-- vim.lsp.config.clangd.setup {
+--   on_attach = custom_on_attach(),
+-- }
 
 -- (Optional) Apply to all servers globally:
 -- local lspconfig = require("lspconfig")

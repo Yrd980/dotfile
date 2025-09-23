@@ -20,6 +20,7 @@ return {
     },
     picker = { enabled = true },
     quickfile = { enabled = true },
+    image = {},
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
